@@ -1,0 +1,14 @@
+/* LOGIN PANEL */
+
+.form-login{
+text-align: center;
+}
+
+.panel-login-col{
+
+}
+
+.panel-login-col input {
+   width:250px;
+   margin: 10px;
+}

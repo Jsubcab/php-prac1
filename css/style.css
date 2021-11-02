@@ -1,0 +1,54 @@
+/* NAVBAR */
+.menu-navbar a {
+    text-decoration: none !important;
+    padding: 10px;
+}
+
+.menu-navbar-right a {
+margin: 10px;
+}
+
+.btn-group .menu-navbar-right-dropdown {
+margin-top:75%;
+}
+
+/* CATEGORIES */
+
+.button-col {
+    padding:20px;
+}
+
+.button-category{
+background-color: #0069d9;
+color: white;
+cursor: pointer;
+border:white;
+height:50vh;
+}
+
+.button-category:active{
+    background-color: #0058b6;
+}
+
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Old versions of Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Edge, Opera and Firefox */
+  }
+
+.card-product-image{
+    height:200px;
+    width:100%;
+    overflow: hidden;
+    text-align:center;
+  }
+
+  .card-product-image img{
+    width: 150%;
+    margin-left: 50%;
+    transform: translateX(-50%);
+  }
