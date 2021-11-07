@@ -36,8 +36,7 @@ $resultCheck = mysqli_num_rows($result);
       <div class="card-body">
         <h5 class="card-title"><span><?php echo $row['name'];?></span></h5>
         <p class="card-text"><?php echo substr_replace($description, "...", 100)?></p>
-        <a href="#" class="btn btn-primary"><i class="far fa-eye"></i></a>
-        <a href="#" class="btn btn-primary"><i class="fas fa-cart-plus"></i></a>
+        <a href="products.php?varname=<?php echo $row['id'];?>" class="btn btn-primary"><i class="far fa-eye"></i> View</a>
       </div>
     </div>
 <?php

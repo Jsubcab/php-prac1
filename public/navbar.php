@@ -8,9 +8,6 @@
           <a href="index.php">Categories</a>
         </li>
         <li class="nav-item">
-          <a href="products.php">Products</a>
-        </li>
-        <li class="nav-item">
             <i class="bi bi-cart"></i>
         </li>
       </ul>

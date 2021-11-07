@@ -48,7 +48,30 @@ height:50vh;
   }
 
   .card-product-image img{
-    width: 150%;
+    width: 100%;
     margin-left: 50%;
     transform: translateX(-50%);
+  }
+
+  /* PRODUCTS */
+
+  .col-product-img img{
+    width:100%;
+  }
+
+  .col-product-info h4{
+    font-size: 2em;
+    font-weight: bold;
+  }
+
+  .col-product-info p{
+    margin-top:10px;
+    font-size: 1.5em;
+    font-weight: bold;
+  }
+
+  .product-info-category{
+    font-size: 1.1em;
+    font-style: italic;
+    color:#acacac;
   }
