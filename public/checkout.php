@@ -85,7 +85,7 @@ if(isset($_GET["action"]))
             <h3>Order Details</h3>
             <table class="table table-bordered">
                 <tr>
-                <th width="40%">Item Name</th>
+                <th width="40%">Product Name</th>
                 <th width="10%">Quantity</th>
                 <th width="20%">Single Price</th>
                 <th width="15%">Total</th>
@@ -134,6 +134,9 @@ if(isset($_GET["action"]))
                 }
                 ?>
             <table>
+        </div>
+        <div class="col">
+          <a href="confirmation.php" class="btn btn-primary"><i class="fas fa-sign-out-alt"></i> Checkout</a>
         </div>
      </div>
 
