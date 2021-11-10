@@ -1,6 +1,7 @@
 <?php
 //create connection
 session_start();
+
 $dbserverName = "localhost";
 $dbuserName = "root";
 $dbpassword = "";

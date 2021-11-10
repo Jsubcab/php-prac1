@@ -1,25 +1,15 @@
 <?php
-session_start();
-if (!isset($_SESSION['loggedin'])) {
-	header('Location: index.php');
-	exit;
-}
-$DATABASE_HOST = 'localhost';
-$DATABASE_USER = 'root';
-$DATABASE_PASS = '';
-$DATABASE_NAME = 'shop';
-$con = mysqli_connect($DATABASE_HOST, $DATABASE_USER, $DATABASE_PASS, $DATABASE_NAME);
-if (mysqli_connect_errno()) {
-	exit('Failed to connect to MySQL: ' . mysqli_connect_error());
-}
-// We don't have the password or email info stored in sessions so instead we can get the results from the database.
-$stmt = $con->prepare('SELECT name, surname1, pass FROM users WHERE id = ?');
-// In this case we can use the account ID to get the account info.
-$stmt->bind_param('i', $_SESSION['id']);
-$stmt->execute();
-$stmt->bind_result($name, $surname1, $password);
-$stmt->fetch();
-$stmt->close();
+include '../private/connect.inc.php';
+
+
+$queryUserInfo = $con->prepare('SELECT id, name FROM users WHERE id = ?');
+
+$queryUserInfo->bind_param('i', $_SESSION['id']);
+$queryUserInfo->execute();
+$queryUserInfo->bind_result($userId, $userName);
+$queryUserInfo->fetch();
+$queryUserInfo->close();
+
 ?>
 
 <!DOCTYPE html>
@@ -39,26 +29,90 @@ $stmt->close();
 <script id="replace_with_navbar" src="../js/nav.js"></script>
 
     <div class="container">
-    <p>Welcome back, <?=$_SESSION['user']?>!</p>
+    <p>Welcome back, <?php echo $userName?>!</p>
+		<div class="row">
+			<div class="col">
+			<h3>Past orders</h3>
 
-    <table>
-					<tr>
-						<td>Username:</td>
-						<td><?=$_SESSION['user']?></td>
-					</tr>
-					<tr>
-						<td>Name:</td>
-						<td><?=$name?></td>
-					</tr>
-					<tr>
-						<td>Surname:</td>
-						<td><?=$surname1?></td>
-					</tr>
-                    <tr>
-						<td>Password:</td>
-						<td><?=$password?></td>
-					</tr>
-				</table>
+			<?php
+				 $queryGetOrders = "SELECT * FROM orders WHERE id_users='$userId';";
+				 $insertQueryGetOrders = mysqli_query($con, $queryGetOrders);
+				 $resultQueryGetOrders = mysqli_num_rows($insertQueryGetOrders);
+
+			
+				 if ($resultQueryGetOrders > 0) {
+					while ($rowOrder = mysqli_fetch_assoc($insertQueryGetOrders)) {
+						$orderId = $rowOrder['id'];
+						?>
+						<span>Order number: </span> <?php echo $orderId; ?>
+						<table>
+							<tr>
+								<th width="20%">Product Name</th>
+								<th width="20%">Quantity</th>
+								<th width="30%">Single Price</th>
+								<th width="30%">Total</th>
+							</tr>
+							
+								<?php
+								
+									$queryGetInvoiceProducts = "SELECT * FROM invoice WHERE id_orders='$orderId';";
+									$insertQueryGetInvoiceProducts = mysqli_query($con, $queryGetInvoiceProducts);
+									$resultQueryGetInvoiceProducts = mysqli_num_rows($insertQueryGetInvoiceProducts);
+								
+							
+							if ($resultQueryGetInvoiceProducts > 0) {
+								$total = 0;
+								while ($rowInvoice = mysqli_fetch_assoc($insertQueryGetInvoiceProducts)) {
+									
+									
+									
+										$stmt=$con->prepare("SELECT name, price FROM products WHERE id = ?");
+										$stmt->bind_param("s", $rowInvoice['id_products']);
+										$stmt->execute();
+										$stmt->bind_result($productName, $priceProduct);
+										$stmt->fetch();
+										$stmt->close();
+								
+								?>
+								<tr>
+									<td><?php echo $productName;?></td>
+									<td><?php echo $rowInvoice['quantity'];?></td>
+									<td><?php echo $priceProduct;?> EUR</td>
+									<td><?php echo number_format($priceProduct * $rowInvoice['quantity'], 2);?> EUR</td>
+									
+								</tr>
+						
+								<?php
+                 					$total += $rowInvoice['quantity'] * $priceProduct;
+								?>
+
+								
+							<?php
+								}
+							}
+							?>
+							<tr>
+									<td colspan="3">Total</td>
+									<td><?php echo number_format($total, 2); ?> EUR</td>
+									<td></td>
+								</tr>
+								
+						</table>
+						<br>
+						<?php
+						
+
+					}
+				 } else {
+					?>
+					<p>There is not orders yet!</p>
+					<?php
+				 }
+
+			?>
+			</div>
+		</div>
+
     </div>
 
 

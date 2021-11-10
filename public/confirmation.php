@@ -19,6 +19,16 @@ session_start();
 <div class="container">
   <div class="row">
     <div class="col-md-12 col-lg-6">
+                <?php
+                if (isset($_SESSION['loggedin'])) {
+                ?>
+                <form action="../private/insert_checkout_logged.php" method="POST">
+                <input type="hidden" name="id_user" value="<?php echo $_SESSION['id']; ?>" />
+                <button name="submit" type="submit" class="btn btn-primary"><i class="fas fa-shopping-cart"></i> Submit order</button>
+                </form>
+            <?php
+                } else {
+                    ?>
             <form action="../private/insert_checkout.php" method="POST">
             <div class="mb-3">
                 <label for="user-email" class="form-label">Email Address</label>
@@ -59,16 +69,33 @@ session_start();
             </div>
             <button name="submit" type="submit" class="btn btn-primary">Submit</button>
             </form>
+                <?php
+                }
+                ?>
     </div>
     <div class="col-md-12 col-lg-6">
         <div class="container">
             <div class="row">
                 <div class="col">
+                <?php
+                if (isset($_SESSION['loggedin'])) {
+                ?>
+                <h4><i class="far fa-smile"></i> Thank you for buying with us!</h4>
+                        <br>
+                        <p>We wish you an amazing day! You can proceed with the order.</p>
+                </div>
+                <?php
+                } else {
+                    ?>
                 <h4><i class="fas fa-exclamation-circle"></i> Register to checkout</h4>
                         <br>
                         <p>Dear costumer,</p>
                         <span>You will need to create an account to proceed with the checkout of your products.</span>
                 </div>
+                <?php
+                }
+                ?>
+
             </div>
             <div class="row">
                 <div class="col">

@@ -72,11 +72,6 @@ if(isset($_POST['submit']))
      } else {
       echo "Error: " . $insertUser . ":-" . mysqli_error($con);
    }
-
-
- 
-
-   //PEGAR AQUI LO DE INSERTAR EL USER
      mysqli_close($con);
 }
 

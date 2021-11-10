@@ -1,3 +1,7 @@
+<?php
+session_start();
+?>
+
 <nav class="navbar navbar-expand-lg">
 
   <div class="container">
@@ -15,7 +19,7 @@
 
       <div class="d-flex align-items-center menu-navbar-right">
         <a href="checkout.php" class="btn btn-primary"><i class="fas fa-shopping-cart"></i></a>
-        <a type="button" href="login.php" class="btn btn-primary"><i class="fas fa-user"></i></a>
+        
         
         <?php
         if (isset($_SESSION['loggedin'])) {
@@ -25,11 +29,16 @@
               <i class="fas fa-user"></i>
             </button>
             <div class="dropdown-menu dropdown-menu-right menu-navbar-right-dropdown">
-              <button class="dropdown-item" type="button">Profile</button>
-              <button class="dropdown-item" type="button">Logout</button>
+              <button onclick="window.location.href='profile.php'" class="dropdown-item" type="button">Profile</button>
+              <button onclick="window.location.href='../private/login_logout.php'" class="dropdown-item" type="button">Logout</button>
             </div>
           </div>
         <?php
+            }
+            else {
+              ?>
+              <a type="button" href="login.php" class="btn btn-primary"><i class="fas fa-user"></i></a>
+              <?php
             }
           ?>
       </div>

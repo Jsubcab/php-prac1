@@ -136,7 +136,11 @@ if(isset($_GET["action"]))
             <table>
         </div>
         <div class="col">
+          <?php
+        if(!empty($_SESSION["shopping_cart"])) {
+        ?>
           <a href="confirmation.php" class="btn btn-primary"><i class="fas fa-sign-out-alt"></i> Checkout</a>
+          <?php }?>
         </div>
      </div>
 
