@@ -1,31 +1,6 @@
 <?php
     include_once '../private/connect.inc.php';
 
-if(isset($_GET["action"]))
-{
- if($_GET["action"] == "delete")
-    {
-        $id = $_GET['id'];
-
-                $deleteQuery = "DELETE FROM products WHERE id=$id";
-
-                if ($con->query($deleteQuery) === TRUE) {
-                ?>
-                <div class="alert alert-warning alert-dismissible fade show" role="alert">
-                The product has been removed from the database
-                <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
-                </div>
-              <?php
-                } else {
-                echo "Error deleting record: " . $con->error;
-                }
-              ?>
-                <?php
-
-            
-    }
-}
-
 ?>
 
 <!DOCTYPE html>
@@ -34,7 +9,7 @@ if(isset($_GET["action"]))
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>eCommerce - Admin</title>
+    <title>eCommerce - Add product</title>
     <link rel="stylesheet" href="../css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/97369f5ca2.js" crossorigin="anonymous"></script>
@@ -43,13 +18,6 @@ if(isset($_GET["action"]))
 <body>
 <script id="replace_with_navbar" src="../js/nav.js"></script>
 
-<?php
-
-$queryGetProducts = "SELECT * FROM products;";
-$insertQueryGetProducts = mysqli_query($con, $queryGetProducts);
-$resultQueryGetProducts = mysqli_num_rows($insertQueryGetProducts);
-
-?>
 <div class="container panel-admin">
 <div class="row">
         <div class="col">
@@ -60,10 +28,8 @@ $resultQueryGetProducts = mysqli_num_rows($insertQueryGetProducts);
 </div>
 
 <div class="container">
+    <form method="post" action="../private/admin_add_product.php">
     <div class="row">
-        <div class="col">
-            <p>Id</p>
-        </div>
         <div class="col">
             <p>Name</p>
         </div>
@@ -85,47 +51,32 @@ $resultQueryGetProducts = mysqli_num_rows($insertQueryGetProducts);
         <div class="col">
             <p>Link_image</p>
         </div>
-        <div class="col">
-            <p>Delete</p>
-        </div>
     </div>
-<?php
-        if ($resultQueryGetProducts > 0) {
-        while ($rowProducts = mysqli_fetch_assoc($insertQueryGetProducts)) {
-                        ?>
     <div class="row">
         <div class="col">
-            <?php echo $rowProducts['id']; ?>
+        <input type="text" name="product-name" class="form-control" id="product-name" required>
         </div>
         <div class="col">
-        <?php echo $rowProducts['name']; ?>
+        <input type="text" name="product-description" class="form-control" id="product-description" required>
         </div>
         <div class="col">
-        <?php echo $rowProducts['description']; ?>
+        <input type="double" name="product-price" class="form-control" id="product-price" required>
         </div>
         <div class="col">
-        <?php echo $rowProducts['price']; ?>
+        <input type="text" name="product-code" class="form-control" id="product-code" required>
         </div>
         <div class="col">
-        <?php echo $rowProducts['code']; ?>
+        <input type="number" name="product-id-categories" class="form-control" id="product-id-categories" required>
         </div>
         <div class="col">
-        <?php echo $rowProducts['id_categories']; ?>
+        <input type="number" name="product-stock" class="form-control" id="product-stock" required>
         </div>
         <div class="col">
-        <?php echo $rowProducts['stock']; ?>
-        </div>
-        <div class="col">
-        <?php echo $rowProducts['link_image']; ?>
-        </div>
-        <div class="col">
-        <a href="admin.php?action=delete&id=<?php echo $rowProducts['id']; ?>" class="btn btn-danger"><i class="far fa-trash-alt"></i></a>
+        <input type="text" name="product-link-image" class="form-control" id="product-link-image" required>
         </div>
     </div>
-    <?php
-                    }
-                }
-                    ?>
+    <button name="add_product" type="submit" class="btn btn-primary">Add</button>
+    </form>
 </div>
 
 

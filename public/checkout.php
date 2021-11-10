@@ -103,18 +103,7 @@ if(isset($_GET["action"]))
                     
                     <td><?php echo $values["product_name"]; ?></td>
                     <td>
-                    <form action="" method="post">
-                        <input type="number" class="form-control" name="amount[<?php echo $values["product_id"];?>]" value="<?php echo $_POST['amount'][$values["product_id"]];?>" min="1">
-                        <input type="submit" value="Update" name="submit_quantity" class="btn btn-primary btn-sm">
-                  </form>
-
-                  <?php
-                  if (isset($_POST['submit_quantity']) && isset($_POST['amount'][$values["product_id"]])) {
-                    $values["product_quantity"] = $_POST['amount'][$values["product_id"]];
-                    } else { 
-                      $values["product_quantity"] = 1;
-                    }
-                  ?>
+                    <?php echo $values["product_quantity"]; ?>
                     </td>
                     <td><?php echo $values["product_price"]; ?> EUR</td>
                     <td><?php echo number_format($values["product_quantity"] * $values["product_price"], 2);?> EUR</td>

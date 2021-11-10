@@ -1,3 +1,10 @@
+/* INDEX */
+
+.categories-title {
+  text-align:center;
+  margin: 20px 0px 20px 0px;
+}
+
 /* NAVBAR */
 .menu-navbar a {
     text-decoration: none !important;
@@ -53,6 +60,19 @@ height:50vh;
     transform: translateX(-50%);
   }
 
+  .card-title {
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .card-price-product {
+    font-size: 17px;
+    font-weight: bold;
+    display: block;
+    margin-bottom:10px;
+
+  }
+
   /* PRODUCTS */
 
   .col-product-img img{
@@ -74,4 +94,10 @@ height:50vh;
     font-size: 1.1em;
     font-style: italic;
     color:#acacac;
+  }
+
+  /* ADMIN */
+
+  .panel-admin {
+    margin: 20px 0px 20px 0px;
   }

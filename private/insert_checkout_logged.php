@@ -48,6 +48,7 @@ if(isset($_POST['submit']))
         </div>
           <?php
           header("Refresh: 3;url=../public/profile.php");
+          mysqli_close($con);
           exit();
 
 }

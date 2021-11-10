@@ -32,7 +32,7 @@ session_start();
             <form action="../private/insert_checkout.php" method="POST">
             <div class="mb-3">
                 <label for="user-email" class="form-label">Email Address</label>
-                <input name="user-email" type="email" class="form-control" id="user-email" aria-describedby="emailHelp required">
+                <input name="user-email" type="email" class="form-control" id="user-email" aria-describedby="emailHelp required" required>
                 <div id="emailHelp" class="form-text">Your email is going to be your user.</div>
             </div>
             <div class="mb-3">
@@ -41,31 +41,31 @@ session_start();
             </div>
             <div class="mb-3">
                 <label for="user-name" class="form-label">Name</label>
-                <input name="user-name" type="text" class="form-control" id="user-name" aria-describedby="nameHelp" >
+                <input name="user-name" type="text" class="form-control" id="user-name" aria-describedby="nameHelp" required>
             </div>
             <div class="mb-3">
                 <label for="user-first-surname" class="form-label">First surname</label>
-                <input name="user-first-surname" type="text" class="form-control" id="user-first-surname" >
+                <input name="user-first-surname" type="text" class="form-control" id="user-first-surname" required>
             </div>
             <div class="mb-3">
                 <label for="user-second-surname" class="form-label">Second surname</label>
-                <input name="user-second-surname" type="text" class="form-control" id="user-second-surname" >
+                <input name="user-second-surname" type="text" class="form-control" id="user-second-surname" required>
             </div>
             <div class="mb-3">
                 <label for="user-address" class="form-label">Address</label>
-                <input name="user-address" type="text" class="form-control" id="user-address" >
+                <input name="user-address" type="text" class="form-control" id="user-address" required>
             </div>
             <div class="mb-3">
                 <label for="user-zipcode" class="form-label">Zipcode</label>
-                <input name="user-zipcode" type="text" class="form-control" id="user-zipcode" >
+                <input name="user-zipcode" type="text" class="form-control" id="user-zipcode" required>
             </div>
             <div class="mb-3">
                 <label for="user-city" class="form-label">City</label>
-                <input name="user-city" type="text" class="form-control" id="user-city" >
+                <input name="user-city" type="text" class="form-control" id="user-city" required>
             </div>
             <div class="mb-3">
                 <label for="user-country" class="form-label">Country</label>
-                <input name="user-country" type="text" class="form-control" id="user-country" >
+                <input name="user-country" type="text" class="form-control" id="user-country" required>
             </div>
             <button name="submit" type="submit" class="btn btn-primary">Submit</button>
             </form>
