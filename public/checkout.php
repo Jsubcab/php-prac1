@@ -23,6 +23,25 @@ if(isset($_POST['add_to_cart']))
           <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
         </div>
       <?php  
+    } else {
+      $arrayId = array_search($_GET['id'], $item_array_id);
+      $productArray = $_SESSION["shopping_cart"][$arrayId];
+      $quantity = $productArray['product_quantity'];
+
+      $item_array = array(
+        'product_id'			=>	$_GET['id'],
+        'product_name'			=>	$_POST['product_name'],
+        'product_price'		=>	$_POST['product_price'],
+        'product_quantity'		=>	$_POST['product_quantity'] + $quantity
+      );
+      $_SESSION["shopping_cart"][$arrayId] = $item_array;
+      ?>
+      
+              <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                Se ha añadido el producto!
+                <button type="button" class="btn-close" data-dismiss="alert" aria-label="Close"></button>
+              </div>
+      <?php
     }
   }
   else
