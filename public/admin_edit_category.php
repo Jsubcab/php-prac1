@@ -1,6 +1,13 @@
 <?php
     include_once '../private/connect.inc.php';
 
+    if(isset($_GET["action"]))
+{
+ if($_GET["action"] == "edit")
+    {
+        $id = $_GET['id'];
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -9,7 +16,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>eCommerce - Add product</title>
+    <title>eCommerce - Admin</title>
     <link rel="stylesheet" href="../css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/97369f5ca2.js" crossorigin="anonymous"></script>
@@ -18,6 +25,13 @@
 <body>
 <script id="replace_with_navbar" src="../js/nav.js"></script>
 
+<?php
+
+$queryGetCategories = "SELECT * FROM categories WHERE categoryId=$id;";
+$insertQueryGetCategories = mysqli_query($con, $queryGetCategories);
+$resultQueryGetCategories = mysqli_num_rows($insertQueryGetCategories);
+
+?>
 <div class="container panel-admin">
 <div class="row">
         <div class="col">
@@ -30,39 +44,29 @@
 </div>
 
 <div class="container">
-    <form method="post" action="../private/insert_add_product.php">
+<?php
+        if ($resultQueryGetCategories > 0) {
+        while ($rowCategories = mysqli_fetch_assoc($insertQueryGetCategories)) {
+                        ?>
     <div class="row">
-        <div class="mb-3">
-        <label class="form-label">Name</label>
-        <input type="text" name="product-name" class="form-control" id="product-name" required>
+        <form action="../private/insert_edit_category.php?id=<?php echo $rowCategories['categoryId'];?>" method="POST">
+            <div class="mb-3">
+            <label class="form-label">Id</label>
+            <input type="text" class="form-control" id="disabledTextInput" class="category-id" value="<?php echo $rowCategories['categoryId']; ?>" disabled>
+            </div>
+            <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input type="text" class="form-control" name="category-name" value="<?php echo $rowCategories['categoryName']; ?>" Required>
+            </div>
+            <button name="edit_category" type="submit" class="btn btn-primary">Submit edit</button>
         </div>
-        <div class="mb-3">
-        <label class="form-label">Description</label>
-        <input type="text" name="product-description" class="form-control" id="product-description" required>
-        </div>
-        <div class="mb-3">
-        <label class="form-label">Price</label>
-        <input type="double" name="product-price" class="form-control" id="product-price" required>
-        </div>
-        <div class="mb-3">
-        <label class="form-label">Code</label>
-        <input type="text" name="product-code" class="form-control" id="product-code" required>
-        </div>
-        <div class="mb-3">
-        <label class="form-label">Id category</label>
-        <input type="number" name="product-id-categories" class="form-control" id="product-id-categories" required>
-        </div>
-        <div class="mb-3">
-        <label class="form-label">Stock</label>
-        <input type="number" name="product-stock" class="form-control" id="product-stock" required>
-        </div>
-        <div class="mb-3">
-        <label class="form-label">Link image</label>
-        <input type="text" name="product-link-image" class="form-control" id="product-link-image">
+            
         </div>
     </div>
-    <button name="add_product" type="submit" class="btn btn-primary">Add</button>
-    </form>
+    <?php
+                    }
+                }
+                    ?>
 </div>
 
 

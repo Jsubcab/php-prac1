@@ -107,7 +107,7 @@ if(isset($_GET["action"]))
                     </td>
                     <td><?php echo $values["product_price"]; ?> EUR</td>
                     <td><?php echo number_format($values["product_quantity"] * $values["product_price"], 2);?> EUR</td>
-                    <td><a href="checkout.php?action=delete&id=<?php echo $values["product_id"]; ?>"><span class="btn btn-danger"><i class="fas fa-minus-square"></i></span></a></td>
+                    <td><a href="checkout.php?action=delete&id=<?php echo $values["product_id"]; ?>"><span class="btn btn-danger"><i class="far fa-trash-alt"></i></span></a></td>
                 </tr>
 
                 <?php

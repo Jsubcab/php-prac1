@@ -1,13 +1,14 @@
 <?php
     include_once '../private/connect.inc.php';
 
+    
 if(isset($_GET["action"]))
 {
  if($_GET["action"] == "delete")
     {
         $id = $_GET['id'];
 
-                $deleteQuery = "DELETE FROM products WHERE id=$id";
+                $deleteQuery = "DELETE FROM categories WHERE categoryId=$id";
 
                 if ($con->query($deleteQuery) === TRUE) {
                 ?>
@@ -45,9 +46,9 @@ if(isset($_GET["action"]))
 
 <?php
 
-$queryGetProducts = "SELECT * FROM products;";
-$insertQueryGetProducts = mysqli_query($con, $queryGetProducts);
-$resultQueryGetProducts = mysqli_num_rows($insertQueryGetProducts);
+$queryGetCategories = "SELECT * FROM categories;";
+$insertQueryGetCategories = mysqli_query($con, $queryGetCategories);
+$resultQueryGetCategories = mysqli_num_rows($insertQueryGetCategories);
 
 ?>
 <div class="container panel-admin">
@@ -70,69 +71,23 @@ $resultQueryGetProducts = mysqli_num_rows($insertQueryGetProducts);
             <p>Name</p>
         </div>
         <div class="col">
-            <p>Description</p>
-        </div>
-        <div class="col">
-            <p>Price</p>
-        </div>
-        <div class="col">
-            <p>Code</p>
-        </div>
-        <div class="col">
-            <p>Id Categories</p>
-        </div>
-        <div class="col">
-            <p>Stock</p>
-        </div>
-        <div class="col">
-            <p>Link_image</p>
-        </div>
-        <div class="col">
-            <p>Delete</p>
+            <p>Action</p>
         </div>
     </div>
 <?php
-        if ($resultQueryGetProducts > 0) {
-        while ($rowProducts = mysqli_fetch_assoc($insertQueryGetProducts)) {
+        if ($resultQueryGetCategories > 0) {
+        while ($rowCategories = mysqli_fetch_assoc($insertQueryGetCategories)) {
                         ?>
     <div class="row">
-        <div class="col">
-            <?php echo $rowProducts['id']; ?>
+    <div class="col">
+            <?php echo $rowCategories['categoryId']; ?>
         </div>
         <div class="col">
-        <?php echo $rowProducts['name']; ?>
+            <?php echo $rowCategories['categoryName']; ?>
         </div>
         <div class="col">
-        <?php echo $rowProducts['description']; ?>
-        </div>
-        <div class="col">
-        <?php echo $rowProducts['price']; ?>
-        </div>
-        <div class="col">
-        <?php echo $rowProducts['code']; ?>
-        </div>
-        <div class="col">
-        <?php 
-        if (is_null($rowProducts['id_categories'])) {
-            ?> NULL <?php
-        } else {
-            echo $rowProducts['id_categories']; 
-        }?>
-        </div>
-        <div class="col">
-        <?php echo $rowProducts['stock']; ?>
-        </div>
-        <div class="col">
-        <?php 
-        if (is_null($rowProducts['link_image'])) {
-            ?> NULL <?php
-        } else {
-            echo $rowProducts['link_image']; 
-        }?>
-        </div>
-        <div class="col">
-        <a href="admin_edit_product.php?action=edit&id=<?php echo $rowProducts['id']; ?>" class="btn btn-warning"><i class="far fa-edit"></i></a>
-        <a href="admin.php?action=delete&id=<?php echo $rowProducts['id']; ?>" class="btn btn-danger"><i class="far fa-trash-alt"></i></a>
+        <a href="admin_edit_category.php?action=edit&id=<?php echo $rowCategories['categoryId']; ?>" class="btn btn-warning"><i class="far fa-edit"></i></a>
+        <a href="admin_view_category.php?action=delete&id=<?php echo $rowCategories['categoryId']; ?>" class="btn btn-danger"><i class="far fa-trash-alt"></i></a>
         </div>
     </div>
     <?php

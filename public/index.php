@@ -30,17 +30,10 @@ $resultCheck = mysqli_num_rows($result);
     if ($resultCheck > 0) {
         while ($row = mysqli_fetch_assoc($result)) {
 ?>
-    <div class="col">
-    <a class="btn btn-primary" href="categories.php?varname=<?php echo $row['categoryName'];?>"><?php  echo $row['categoryName']; ?></a>
-           
+    <div class="col categories-buttons">
+      <a class="btn btn-primary" href="categories.php?varname=<?php echo $row['categoryName'];?>"><?php  echo $row['categoryName']; ?></a>    
     </div>
-
-          <!--  <div class="col-md-6 col-xs-12 button-col">
-            <a class="btn btn-primary" href="categories.php?varname=<?php echo $row['categoryName'];?>"><?php  echo $row['categoryName']; ?></a>
-             <div class="rounded d-flex justify-content-center align-items-center button-category">
-                <p class="noselect">   </p>
-              </div> 
-          </div>-->
+    
 <?php
         }
     }
