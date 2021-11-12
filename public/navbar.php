@@ -29,7 +29,16 @@ session_start();
               <i class="fas fa-user"></i>
             </button>
             <div class="dropdown-menu dropdown-menu-right menu-navbar-right-dropdown">
-              <button onclick="window.location.href='profile.php'" class="dropdown-item" type="button">Profile</button>
+              <?php
+              if ($_SESSION['permissions'] == 1) {
+                ?> <button onclick="window.location.href='admin.php'" class="dropdown-item" type="button">Profile</button><?php
+              } else if ($_SESSION['permissions'] == 3){
+                ?>
+                <button onclick="window.location.href='profile.php'" class="dropdown-item" type="button">Profile</button>
+                <?php
+              }
+              ?>
+              
               <button onclick="window.location.href='../private/login_logout.php'" class="dropdown-item" type="button">Logout</button>
             </div>
           </div>

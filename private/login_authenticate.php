@@ -28,12 +28,14 @@ if ($stmt = $con->prepare('SELECT id, pass, id_permissions FROM users WHERE user
            session_regenerate_id();
             $_SESSION['loggedin'] = TRUE;
             $_SESSION['user'] = $_POST['username'];
+            $_SESSION['permissions'] = $id_permissions;
             $_SESSION['id'] = $id;
             header('Location: ../public/profile.php');
         } else if (($_POST['password'] === $password) && ($id_permissions == 1)) {
         session_regenerate_id();
         $_SESSION['loggedin'] = TRUE;
         $_SESSION['user'] = $_POST['username'];
+        $_SESSION['permissions'] = $id_permissions;
         $_SESSION['id'] = $id;
         header('Location: ../public/admin.php');
         }else {
